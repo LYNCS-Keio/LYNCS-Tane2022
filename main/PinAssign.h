@@ -4,3 +4,5 @@
 #define MotorA_LineB 15
 #define MotorB_LineA 16
 #define MotorB_LineB 17
+#define GNSS_TX 0
+#define GNSS_RX 4

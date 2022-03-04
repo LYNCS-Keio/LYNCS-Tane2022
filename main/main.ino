@@ -58,6 +58,9 @@ void loop() {
     Serial.println(""); 
     **/
     motor.MotorA_Rotate(-1);
-    motor.MotorB_Rotate(0);
-    delay(100);
+    motor.MotorB_Rotate(1);
+    delay(2000);
+    motor.MotorA_Rotate(1);
+    motor.MotorB_Rotate(-1);
+    delay(2000);
 }

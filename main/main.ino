@@ -23,27 +23,38 @@ void setup() {
     Serial.begin(115200);
     Serial.println(F("LYNCS Tane 2022"));
     sSerial.begin(9600);
+    // ニクロム線の初期化
     pinMode(19, OUTPUT);
     digitalWrite(19, LOW);
+    // モーターの初期化
+    // モーターは必ず初期化してください
+    // さもなくば燃えます
     motor.Init();
+    // DPS310の初期化
     /**
     PressureSensor.begin(Wire);
     ret = PressureSensor.startMeasureBothCont(4,2,4,2);
     **/
+    // BMX055及びMadgwick Filterの初期化
+    // Madgwick Filterの周波数が実際のループの周波数と合うようにすること
     /**/
-    madgwick.begin(10); //1Hz (1000msec周期)
+    madgwick.begin(10); //10Hz (1000msec周期)
     nineDoFSensor.BMX055_Init(Wire);
     delay(100);
     /**/
+    // GNSSの初期化
     gps.Init(sSerial, tinygps);
 }
 
+// Madgwick Filterとの兼ね合いを考えるとループは10Hz程度が最適
 void loop() {
+    // 目的地の方位取得
     Serial.println("--------------------------------------"); 
     if (gps.get_azimuth(target_azimuth)) {
         Serial.print("target azimuth = ");
         Serial.println(target_azimuth);
     }
+    // 高度(m)の取得
     /**
     float heightMetre;
     ret = PressureSensor.calcHeighMetre(heightMetre, 100820);
@@ -51,6 +62,7 @@ void loop() {
         Serial.println(heightMetre);
     }
     **/
+    // 自身の方位の取得
     /**
     madgwick.update(nineDoFSensor.xGyro, nineDoFSensor.yGyro, nineDoFSensor.zGyro,
     nineDoFSensor.xAccl, nineDoFSensor.yAccl, nineDoFSensor.zAccl, 
@@ -65,6 +77,9 @@ void loop() {
     Serial.print(yaw);
     Serial.println(""); 
     **/
+    // モーターの回転
+    // MotorX_Rotate(1 or 0 or -1);
+    // モーターXを正転 or 停止 or 逆転　する
     /**
     motor.MotorA_Rotate(-1);
     motor.MotorB_Rotate(1);

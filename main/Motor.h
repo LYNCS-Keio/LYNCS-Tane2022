@@ -11,8 +11,8 @@ class Motor
     void Init() {
         pinMode(MotorA_LineA, OUTPUT);
         pinMode(MotorA_LineB, OUTPUT);
-        pinMode(MotorB_LineA, OUTPUT_OPEN_DRAIN);
-        pinMode(MotorB_LineB, OUTPUT_OPEN_DRAIN);
+        pinMode(MotorB_LineA, OUTPUT);
+        pinMode(MotorB_LineB, OUTPUT);
         //初期状態は停止
         MotorA_Rotate(0);
         MotorB_Rotate(0);

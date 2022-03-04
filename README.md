@@ -3,7 +3,16 @@
 
 ## Requirement
 
+### 開発環境
+
 - Arduino IDE
+
+### library
+
+Arduino IDEのパッケージマネージャから以下をインストール
+- TinyGPS++
+- EspSoftwareSerial
+- Bluetooth Serial
 
 ## Todo
 

@@ -44,8 +44,15 @@ class GNSS
             double glng_rad = goal_longitude*pi/180;
             double glat_rad = goal_latitude*pi/180;
 
-            double temp_d = radius*acos(sin(nlat_rad)*sin(glat_rad) + cos(nlat_rad)*cos(glat_rad)*cos(glng_rad - nlng_rad));
             double azimuth = pi + atan2(sin(glng_rad - nlng_rad),cos(nlat_rad)*tan(glat_rad) - sin(nlat_rad)*cos(glng_rad - nlng_rad));
             return azimuth * 180 / pi;
         }
+        double distance_cal(double now_longitude,double now_latitude){
+            double nlng_rad = now_longitude*pi/180;
+            double nlat_rad = now_latitude*pi/180; 
+            double glng_rad = goal_longitude*pi/180;
+            double glat_rad = goal_latitude*pi/180;
+
+            double distance = radius*acos(sin(nlat_rad)*sin(glat_rad) + cos(nlat_rad)*cos(glat_rad)*cos(glng_rad - nlng_rad));
+            return distance;
 };

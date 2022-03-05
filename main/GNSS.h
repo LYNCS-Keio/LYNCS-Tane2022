@@ -26,7 +26,25 @@ class GNSS
             }
             return ret;
         }
-        
+
+        float get_distance(double &distance)
+        {
+            int ret = 0;
+            while (_bus->available() > 0){
+                char c = _bus->read();
+                //Serial.print(c);
+                _gps->encode(c);
+                if (_gps->location.isUpdated()){
+                    now_longitude = _gps->location.lng();
+                    now_latitude = _gps->location.lat();
+                    now_altitude = _gps->altitude.meters();
+                    distance = distance_cal(now_longitude,now_latitude);
+                    ret = 1;
+                }
+            }
+            return ret;
+        }
+
     private:
         SoftwareSerial *_bus;
         TinyGPSPlus *_gps;

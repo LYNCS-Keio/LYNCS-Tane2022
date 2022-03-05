@@ -79,6 +79,19 @@ void loop() {
     SerialBT.print("yaw= ");
     SerialBT.print(yaw);
     SerialBT.println(""); 
+
+    if(abs(yaw-target_azimuth)<15){
+      Motor1_Rotate(1);
+      Motor2_Rotate(1);
+    }
+    else if(yaw<target_azimuth){
+      Motor1_Rotate(1);
+      Motor2_Rotate(-1);
+    }
+    else{
+      Motor1_Rotate(-1);
+      Motor2_Rotate(1);
+    }
     /**/
     // モーターの回転
     // MotorX_Rotate(1 or 0 or -1);
